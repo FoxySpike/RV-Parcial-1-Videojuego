@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 5768f7f29c31549449349311d196f160
+  - enabled: 1
+    path: Assets/Scenes/Alejandro.unity
+    guid: 97d7f4adebb44e2429bc99f28b89d743
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

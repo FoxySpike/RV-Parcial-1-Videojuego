@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        // ESTO TE DIRÁ SI EL TECLADO RESPONDE
+        Debug.Log("Moviendo: " + moveInput);
     }
 
     public void OnJump(InputValue value)
@@ -47,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (moveInput != Vector2.zero) Debug.Log("Detectando teclas: " + moveInput);
+
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;

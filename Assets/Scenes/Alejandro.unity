@@ -11040,6 +11040,7 @@ MonoBehaviour:
   - {fileID: 594495979}
   - {fileID: 668986450}
   - {fileID: 1704708763}
+  modoPruebaTeclado: 1
 --- !u!4 &1783042532
 Transform:
   m_ObjectHideFlags: 0

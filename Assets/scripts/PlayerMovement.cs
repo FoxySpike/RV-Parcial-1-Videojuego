@@ -8,45 +8,74 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float rotationSpeed = 10f;
 
-    [Header("Física Manual")]
-    public float gravity = -9.81f; // Fuerza de gravedad estándar
-    private Vector3 velocity;      // Para guardar la caída acumulada
+    [Header("Salto")]
+    public float jumpForce = 1.5f;
+
+    [Header("FÃ­sica Manual")]
+    public float gravity = -9.81f;
+    private Vector3 velocity;
 
     private Vector2 moveInput;
     private CharacterController controller;
 
-    void Awake() => controller = GetComponent<CharacterController>();
+    private Animator animator;
+
+    public float moveAmount;
+
+    void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+    }
+
+    public void SetAnimator(Animator anim)
+    {
+        animator = anim;
+    }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
     }
 
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed && controller.isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+    }
+
     void Update()
     {
-        // 1. Gravedad: Si está en el suelo, reseteamos la fuerza de caída
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Un pequeño empuje hacia abajo para mantenerlo pegado
+            velocity.y = -2f;
         }
 
-        // 2. Movimiento Horizontal
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
-        controller.Move(move * Time.deltaTime * speed);
+        controller.Move(move * speed * Time.deltaTime);
 
-        // 3. Aplicar Gravedad Constantemente
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime); // Este segundo Move aplica la caída
+        controller.Move(velocity * Time.deltaTime);
 
-        // 4. Rotación Suavizada
         if (move != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
+
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 targetRotation,
                 rotationSpeed * Time.deltaTime
             );
+        }
+
+        moveAmount = moveInput.magnitude;
+
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", moveAmount);
+            animator.SetBool("Grounded", controller.isGrounded);
+            animator.SetFloat("Yvelocity", velocity.y);
         }
     }
 }

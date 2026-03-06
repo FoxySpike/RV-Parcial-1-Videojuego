@@ -1,13 +1,44 @@
 using UnityEngine;
 
-public class sistemadereespawn : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class SistemaRespawn : MonoBehaviour
 {
-    public Transform posicionReespawn;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player"))
+    public float limiteCaida = -10f;
+
+    private Transform puntoRespawn;
+    private CharacterController controller;
+
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+
+        GameObject respawn = GameObject.FindGameObjectWithTag("Respawn");
+
+        if (respawn != null)
         {
-            other.transform.position = posicionReespawn.position;
+            puntoRespawn = respawn.transform;
         }
+        else
+        {
+            Debug.LogError("No se encontró un objeto con tag Respawn");
+        }
+    }
+
+    void Update()
+    {
+        if (puntoRespawn == null)
+            return;
+
+        if (transform.position.y < limiteCaida)
+        {
+            Respawn();
+        }
+    }
+
+    void Respawn()
+    {
+        controller.enabled = false;
+        transform.position = puntoRespawn.position;
+        controller.enabled = true;
     }
 }

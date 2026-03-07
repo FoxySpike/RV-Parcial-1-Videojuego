@@ -6,6 +6,8 @@ TagManager:
   tags:
   - floor
   - ObjetoMovil
+  - Arrow
+  - spawn
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - grabable
-  - 
+  - push
   - 
   - 
   - floor

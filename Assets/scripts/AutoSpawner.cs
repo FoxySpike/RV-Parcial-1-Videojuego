@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,15 +24,15 @@ public class AutoSpawner : MonoBehaviour
     }
     private void InicializarMultijugadorReal()
     {
-        // Jugador 1: Siempre Teclado
         SpawnPlayer(0, Keyboard.current, "P1");
 
-        // Jugadores 2-4: Solo si hay mandos conectados
         var gamepads = Gamepad.all;
-        for (int i = 0; i < gamepads.Count && i < 3; i++)
+
+        int playersToSpawn = Mathf.Min(gamepads.Count, 3);
+
+        for (int i = 0; i < playersToSpawn; i++)
         {
-            string nombreEsquema = "P" + (i + 2); // Resultado: P2, P3, P4
-            SpawnPlayer(i + 1, gamepads[i], nombreEsquema);
+            SpawnPlayer(i + 1, gamepads[i], "Gamepad");
         }
 
         LogDispositivos(gamepads.Count);

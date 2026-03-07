@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerGrab : MonoBehaviour
+public class GrabAbility : PlayerAbility
 {
     [Header("Detección")]
     public float grabRadius = 2f;
@@ -12,6 +11,9 @@ public class PlayerGrab : MonoBehaviour
 
     private GameObject objetoCercano;
     private Rigidbody objetoAgarrado;
+
+    public Animator animator;           // referencia al animator
+    public string shootTrigger = "Shoot";
 
     void Update()
     {
@@ -45,10 +47,14 @@ public class PlayerGrab : MonoBehaviour
         }
     }
 
-    public void OnGrab(InputValue value)
+    public override void Activate()
     {
-        if (!value.isPressed) return;
 
+        if (animator != null)
+        {
+            animator.SetTrigger(shootTrigger);
+        }
+        
         if (objetoAgarrado == null)
         {
             IntentarAgarrar();

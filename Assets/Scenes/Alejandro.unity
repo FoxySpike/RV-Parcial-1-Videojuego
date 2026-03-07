@@ -18872,6 +18872,7 @@ MonoBehaviour:
   fadeImage: {fileID: 2072614174}
   panelFinal: {fileID: 1196872752}
   velocidadFade: 1.5
+  nombreSiguienteEscena: nivel 2
 --- !u!1001 &2008224978
 PrefabInstance:
   m_ObjectHideFlags: 0

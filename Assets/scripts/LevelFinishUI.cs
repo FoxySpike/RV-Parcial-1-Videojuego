@@ -10,6 +10,8 @@ public class LevelFinishUI : MonoBehaviour
 
     public float velocidadFade = 1.5f;
 
+    public string nombreSiguienteEscena; // <- nombre de la escena
+
     void Start()
     {
         Color c = fadeImage.color;
@@ -40,6 +42,6 @@ public class LevelFinishUI : MonoBehaviour
 
     public void SiguienteNivel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(nombreSiguienteEscena);
     }
 }

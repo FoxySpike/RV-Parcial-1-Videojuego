@@ -223,7 +223,7 @@
                 {
                     "name": "up",
                     "id": "be289751-7d26-44dc-a221-ef3bbf6052f0",
-                    "path": "<Keyboard>/numpad8",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",
@@ -234,7 +234,7 @@
                 {
                     "name": "down",
                     "id": "65f6ea34-ebe8-4dca-893a-ac4639a76d12",
-                    "path": "<Keyboard>/numpad5",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",
@@ -245,7 +245,7 @@
                 {
                     "name": "left",
                     "id": "7409af37-bbdf-4948-9d27-e0ee768cbbfd",
-                    "path": "<Keyboard>/numpad4",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",
@@ -256,7 +256,7 @@
                 {
                     "name": "right",
                     "id": "a6672359-fa77-4034-80f7-8fdd1f2e0d84",
-                    "path": "<Keyboard>/numpad6",
+                    "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",
@@ -322,7 +322,7 @@
                 {
                     "name": "",
                     "id": "77b34683-e225-4062-aff3-584130cdee2e",
-                    "path": "<Keyboard>/numpad0",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",
@@ -432,7 +432,7 @@
                 {
                     "name": "",
                     "id": "c895f1b2-9b29-43b7-b569-ff071ec2cfcc",
-                    "path": "<Keyboard>/numpadEnter",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": ";P4",

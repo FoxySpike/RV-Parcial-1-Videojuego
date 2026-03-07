@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ArcherShootAbility : PlayerAbility
 {
@@ -9,24 +8,42 @@ public class ArcherShootAbility : PlayerAbility
     public float shootCooldown = 0.5f;
     private float lastShootTime;
 
-    public int allowedPlayerIndex = 1; // jugador que puede usar la habilidad
+    public Animator animator;
+    public string shootTrigger = "Shoot";
+
+    public AudioSource shootSound; // sonido del disparo
 
     public override void Activate()
     {
-        PlayerInput playerInput = GetComponent<PlayerInput>();
-
-        if (playerInput == null || playerInput.playerIndex != allowedPlayerIndex)
-            return;
-
+        // cooldown
         if (Time.time < lastShootTime + shootCooldown)
             return;
 
+        if (arrowPrefab == null || shootPoint == null)
+        {
+            Debug.LogError("Falta arrowPrefab o shootPoint");
+            return;
+        }
+
         lastShootTime = Time.time;
+
+        if (animator != null)
+        {
+            animator.SetTrigger(shootTrigger);
+        }
+
+        // reproducir sonido
+        if (shootSound != null)
+        {
+            shootSound.Play();
+        }
 
         Instantiate(
             arrowPrefab,
             shootPoint.position,
             shootPoint.rotation
         );
+
+        Debug.Log("Flecha disparada");
     }
 }

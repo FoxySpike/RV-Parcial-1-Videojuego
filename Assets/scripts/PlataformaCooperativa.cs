@@ -10,7 +10,11 @@ public class PlataformaCooperativa : MonoBehaviour
     public Transform posicionActivada;
     public float velocidad = 3f;
 
+    [Header("Audio")]
+    public AudioSource audioMovimiento;
+
     private Vector3 posicionInicial;
+    private bool moviendose = false;
 
     void Start()
     {
@@ -21,14 +25,15 @@ public class PlataformaCooperativa : MonoBehaviour
     {
         int botonesActivos = ContarBotonesPresionados();
 
-        if (botonesActivos >= botonesRequeridos)
-        {
-            MoverHacia(posicionActivada.position);
-        }
-        else
-        {
-            MoverHacia(posicionInicial);
-        }
+        Vector3 destino = botonesActivos >= botonesRequeridos
+            ? posicionActivada.position
+            : posicionInicial;
+
+        bool seEstaMoviendo = Vector3.Distance(transform.position, destino) > 0.01f;
+
+        MoverHacia(destino);
+
+        ControlarAudio(seEstaMoviendo);
     }
 
     int ContarBotonesPresionados()
@@ -53,5 +58,28 @@ public class PlataformaCooperativa : MonoBehaviour
             destino,
             velocidad * Time.deltaTime
         );
+    }
+
+    void ControlarAudio(bool seEstaMoviendo)
+    {
+        if (seEstaMoviendo && !moviendose)
+        {
+            moviendose = true;
+
+            if (audioMovimiento != null)
+            {
+                audioMovimiento.time = 2f; // empezar desde el segundo 2
+                audioMovimiento.Play();
+            }
+        }
+        else if (!seEstaMoviendo && moviendose)
+        {
+            moviendose = false;
+
+            if (audioMovimiento != null)
+            {
+                audioMovimiento.Stop();
+            }
+        }
     }
 }

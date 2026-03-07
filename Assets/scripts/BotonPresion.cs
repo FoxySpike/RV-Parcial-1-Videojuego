@@ -6,20 +6,28 @@ public class BotonPresion : MonoBehaviour
 
     private int objetosEncima = 0;
 
+    public AudioSource sonidoBoton;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")||other.CompareTag("ObjetoMovil"))
+        if (other.CompareTag("Player") || other.CompareTag("ObjetoMovil"))
         {
             objetosEncima++;
-            EstaPresionado = true;
+
+            if (!EstaPresionado)
+            {
+                EstaPresionado = true;
+                sonidoBoton.Play();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")||other.CompareTag("ObjetoMovil"))
+        if (other.CompareTag("Player") || other.CompareTag("ObjetoMovil"))
         {
             objetosEncima--;
+
             if (objetosEncima <= 0)
             {
                 objetosEncima = 0;

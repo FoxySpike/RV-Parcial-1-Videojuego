@@ -10,18 +10,13 @@ public class CamaraSeguimiento : MonoBehaviour
     [Header("Movimiento")]
     public float suavizado = 5f;
 
-    [Header("Distancia cámara")]
-    public float distanciaMin = 12f;
-    public float distanciaMax = 22f;
-    public float separacionMax = 20f;
-
     private float alturaFija;
-    private float distanciaActual;
+    private float zFijo;
 
     void Start()
     {
         alturaFija = transform.position.y;
-        distanciaActual = transform.position.z;
+        zFijo = transform.position.z;
 
         BuscarJugadores();
     }
@@ -34,22 +29,12 @@ public class CamaraSeguimiento : MonoBehaviour
             return;
         }
 
-        Vector3 centro = CalcularCentro();
-        float separacion = CalcularSeparacion();
-
-        float t = Mathf.Clamp01(separacion / separacionMax);
-        float distanciaObjetivo = Mathf.Lerp(distanciaMin, distanciaMax, t);
-
-        distanciaActual = Mathf.Lerp(
-            distanciaActual,
-            distanciaObjetivo,
-            suavizado * Time.deltaTime
-        );
+        float centroX = CalcularCentroX();
 
         Vector3 posicionObjetivo = new Vector3(
-            centro.x,
+            centroX,
             alturaFija,
-            centro.z - distanciaActual
+            zFijo
         );
 
         transform.position = Vector3.Lerp(
@@ -71,36 +56,15 @@ public class CamaraSeguimiento : MonoBehaviour
         }
     }
 
-    Vector3 CalcularCentro()
+    float CalcularCentroX()
     {
-        Vector3 suma = Vector3.zero;
+        float suma = 0f;
 
         foreach (var j in jugadores)
         {
-            suma += j.position;
+            suma += j.position.x;
         }
 
         return suma / jugadores.Count;
-    }
-
-    float CalcularSeparacion()
-    {
-        float maxDist = 0f;
-
-        for (int i = 0; i < jugadores.Count; i++)
-        {
-            for (int j = i + 1; j < jugadores.Count; j++)
-            {
-                float dist = Vector3.Distance(
-                    jugadores[i].position,
-                    jugadores[j].position
-                );
-
-                if (dist > maxDist)
-                    maxDist = dist;
-            }
-        }
-
-        return maxDist;
     }
 }

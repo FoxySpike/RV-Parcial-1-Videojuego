@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 
 public class SpawnPlatformAbility : PlayerAbility
@@ -13,29 +12,23 @@ public class SpawnPlatformAbility : PlayerAbility
     public float riseHeight = 1f;
     public float riseSpeed = 4f;
 
-    [Header("Restricciones")]
-    public int allowedPlayerIndex = 0; // qué jugador puede usarlo
-
     private CharacterController controller;
-    private PlayerInput playerInput;
+
+    public Animator animator;
+    public string shootTrigger = "Shoot";
+
+    public AudioSource audioSpawn; // audio de la habilidad
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
     }
 
     public override void Activate()
     {
-        // SOLO cierto jugador puede usar la habilidad
-        if (playerInput.playerIndex != allowedPlayerIndex)
-            return;
-
-        // SOLO si está en el suelo
         if (!controller.isGrounded)
             return;
 
-        // SOLO si no existe otra plataforma
         if (currentPlatform != null)
             return;
 
@@ -43,12 +36,24 @@ public class SpawnPlatformAbility : PlayerAbility
 
         currentPlatform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
 
+        // reproducir sonido desde el segundo 2
+        if (audioSpawn != null)
+        {
+            audioSpawn.time = 0.7f;
+            audioSpawn.Play();
+        }
+
         StartCoroutine(RisePlatform(currentPlatform));
         StartCoroutine(DestroyPlatform());
     }
 
     IEnumerator RisePlatform(GameObject platform)
     {
+        if (animator != null)
+        {
+            animator.SetTrigger(shootTrigger);
+        }
+
         Vector3 start = platform.transform.position;
         Vector3 target = spawnPoint.position;
 

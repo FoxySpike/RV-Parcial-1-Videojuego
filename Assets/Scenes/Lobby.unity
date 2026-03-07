@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 502a8efd3619d1c49b5fec0d492b69fe, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 464262129}
   - component: {fileID: 464262128}
   - component: {fileID: 464262127}
+  - component: {fileID: 464262130}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -421,12 +422,25 @@ Transform:
   m_GameObject: {fileID: 464262126}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &464262130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464262126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d2c738aa75ffc4298ef7b8f28aff91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CamaraMenu
+  velocidadRotacion: 7
 --- !u!1 &787260871
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +822,7 @@ GameObject:
   - component: {fileID: 1691698293}
   - component: {fileID: 1691698292}
   - component: {fileID: 1691698295}
+  - component: {fileID: 1691698296}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -878,7 +893,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1691698293}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1691698296}
+        m_TargetAssemblyTypeName: ControladorEscenas, Assembly-CSharp
+        m_MethodName: CargarEscena
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Alejandro
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1691698293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,6 +966,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1691698296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691698290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17afa8c4cd766534d935f31ffb88a3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControladorEscenas
 --- !u!1 &2028127482
 GameObject:
   m_ObjectHideFlags: 0
